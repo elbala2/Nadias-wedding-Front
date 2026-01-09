@@ -1,0 +1,109 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+
+const { data } = await Promise.resolve({
+  data: [
+    {
+      name: 'Edu',
+      email: 'edu@example.com',
+      phone: '1234567890',
+      with: 'Nadia',
+      companions: []
+    }
+  ]
+});
+console.log(data);
+
+---
+
+<MainLayout>
+  <main>
+    <header class="">
+      <h1 class="text-2xl font-bold text-center">Boda Nadia y Edu - Administración</h1>
+    </header>
+
+    <section class="">
+      <p class="text-sm opacity-70">
+        Total de invitados: <span class="font-bold">{data.length}</span>
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 0px;" />
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Viene con</th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item) => (
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>{item.name}</td>
+              <td>
+                <a href={`mailto:${item.email}`}>{item.email}</a>
+              </td>
+              <td>
+                <a href={`tel:${item.phone}`}>{item.phone}</a>
+              </td>
+              <td>{item.with || '+' + item.companions.length}</td>
+              <td/>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  </main>
+</MainLayout>
+
+<style>
+  main {
+    padding-block: 20px;
+    padding-inline: 30px;
+
+    header {
+      border-bottom: 1px solid var(--primary-200);
+      padding-block: 20px;
+      margin-bottom: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background-color: ;
+
+      thead {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
+    
+      th, td {
+        border: 1px solid var(--primary-200);
+        padding: 10px;
+      }
+
+      th {
+        background-color: var(--primary-200);
+      }
+
+      td {
+        background-color: white;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.15s ease;
+
+      &:hover {
+        color: var(--primary-500);
+        text-decoration: underline;
+      }
+    }
+
+  }
+</style>
